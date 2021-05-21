@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import Input from './Input';
+import ExtraFields from './ExtraFields';
 
 const formDataStructure = {
     countryOfWork: '',
@@ -100,6 +101,9 @@ const FormPage = () => {
                                 )
                             }
                         </select>
+                    </div>
+                    <div>
+                        <ExtraFields />
                     </div>
                     <div className="formControl">
                         <button type="submit">Submit</button>
