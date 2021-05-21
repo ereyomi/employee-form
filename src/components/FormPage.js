@@ -8,7 +8,7 @@ const formDataStructure = {
     lastName: '',
     dateOfBirth: '',
     holidayAllowance: 0,
-    maritalStatus: null,
+    maritalStatus: '',
     numberOfChildren: 0,
     socialInsuranceNumber: 0,
     workingHours: 0,
@@ -59,11 +59,12 @@ const FormPage = () => {
         console.log(formData)
     }
     return (
-        <div className="">
+        <div className="sdsdsds">
             <h1>Employee Form Page</h1>
             <div>
                 <form onSubmit={ handleSubmit}>
                     <Input
+                        label="Country Of Work"
                         type="text"
                         value={formData.countryOfWork}
                         onChange={handleForm}
@@ -71,6 +72,7 @@ const FormPage = () => {
                         required={true}
                     />
                     <Input
+                        label="First Name"
                         type="text"
                         value={formData.firstName}
                         onChange={handleForm}
@@ -82,9 +84,11 @@ const FormPage = () => {
                         value={formData.lastName}
                         onChange={handleForm}
                         name="lastName"
+                        label="Last Name"
                         required={true}
                     />
                     <Input
+                        label="Date Of Birth"
                         type="date"
                         value={formData.dateOfBirth}
                         onChange={handleForm}
@@ -92,9 +96,9 @@ const FormPage = () => {
                         required={true}
                     />
                     <div className="custom-app-form">
-                        <label htmlFor="country"></label>
+                        <label htmlFor="country">Select Country</label>
                         <select value={formData.country} onChange={handleForm} name="country">
-                        <option key="default" value="">Select country</option>
+                         
                             {
                                 countriesData && countriesData.length > 0 && countriesData.map(
                                     ( item ) => <option key={item.code} value={item.code}>{item.countryName}</option>

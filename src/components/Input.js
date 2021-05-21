@@ -1,18 +1,33 @@
 import React from 'react';
 
-const Input = ({type, name, value, onChange, required=false, disabled=false}) => {
+const Input = (
+    {
+        type,
+        name,
+        value,
+        onChange,
+        required = false,
+        disabled = false,
+        label = ''
+    }
+) => {
     
     return (
-        <div className="custom-app-form" key={name}>
-            <label htmlFor={name}></label>
+        <div
+            className="custom-app-form"
+            key={name}
+        >
+            <label htmlFor={name}>
+                {label}
+            </label>
             <input
-                type={type}
-                value={value}
-                onChange={onChange}
-                name={name}
-                id={name}
-                required={required}
-                disabled={disabled}
+                type={ type }
+                value={ value }
+                onChange={ onChange }
+                name={ name }
+                id={ name }
+                required={ required }
+                disabled={ disabled }
             />
         </div>
     )
