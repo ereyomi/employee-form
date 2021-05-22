@@ -1,5 +1,5 @@
 import React from 'react'
-const MaritalStatusSelection = ({value, onChange, options}) => {
+const MaritalStatusSelection = ({value, onChange, options, label}) => {
     return (
         <div>
             <label htmlFor="country">Select Country</label>
@@ -8,7 +8,7 @@ const MaritalStatusSelection = ({value, onChange, options}) => {
                     key="default-marital-status"
                     value=""
                 >
-                    Select Marital Status
+                   {label}
                 </option>
                 {
                     options.map(

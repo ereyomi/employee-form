@@ -16,7 +16,7 @@ const formExtraFieldsByCountries = {
             {
                 type: 'select',
                 options: maritalStatus,
-                label: 'Marital Status',
+                label: 'Select Marital Status',
                 name: 'maritalStatus'
             },
             {
@@ -37,7 +37,7 @@ const formExtraFieldsByCountries = {
             {
                 type: 'select',
                 options: maritalStatus,
-                label: 'Marital Status',
+                label: 'Select Marital Status',
                 name: 'maritalStatus'
             },
             {
