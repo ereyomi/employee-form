@@ -1,15 +1,16 @@
 import React, {useState, useEffect} from 'react';
 import Input from './Input';
+import Select from './Select';
 import ExtraFields from './ExtraFields';
 import {getExtraFormAccessByCountries} from './../utils/helpers'
 
 const formDataStructure = {
-    countryOfWork: 'ES',
+    countryOfWork: '',
     firstName: '',
     lastName: '',
     dateOfBirth: '',
     holidayAllowance: 0,
-    maritalStatus: 'M',
+    maritalStatus: '',
     numberOfChildren: 0,
     socialInsuranceNumber: 0,
     workingHours: 0,
@@ -35,8 +36,8 @@ const FormPage = () => {
             const mapCountryData = Object.keys(myJson).map(
                 key => {
                     return {
-                        code: key,
-                        countryName: myJson[key]
+                        value: key,
+                        label: myJson[key]
                     }
               }
             )
@@ -45,8 +46,6 @@ const FormPage = () => {
   }
   useEffect(()=>{
       getData()
-      console.log( getExtraFormAccessByCountries( 'ES' ) )
-      setExtraFieldData(getExtraFormAccessByCountries( 'ES' ))
   }, [] )
     const [ formData, setFormData ] = useState( formDataStructure )
     const [extraFieldData, setExtraFieldData ] = useState( null )
@@ -73,15 +72,16 @@ const FormPage = () => {
         <div className="sdsdsds">
             <h1>Employee Form Page</h1>
             <div>
-                <form onSubmit={ handleSubmit}>
-                    <Input
-                        label="Country Of Work"
-                        type="text"
-                        value={formData.countryOfWork}
-                        onChange={handleForm}
-                        name="countryOfWork"
-                        required={true}
-                    />
+                <form onSubmit={handleSubmit}>
+                    <div className="custom-app-form">
+                        <Select
+                            value={formData.countryOfWork}
+                            onChange={handleOnChangeCountrySeletion}
+                            name="countryOfWork"
+                            options={countriesData}
+                            label="Select country of work"
+                        />
+                    </div>
                     <Input
                         label="First Name"
                         type="text"
@@ -106,17 +106,15 @@ const FormPage = () => {
                         name="dateOfBirth"
                         required={true}
                     />
-                    <div className="custom-app-form">
-                        <label htmlFor="country">Select Country</label>
-                        <select value={formData.countryOfWork} onChange={handleOnChangeCountrySeletion} name="countryOfWork">
-                         
-                            {
-                                countriesData && countriesData.length > 0 && countriesData.map(
-                                    ( item ) => <option key={item.code} value={item.code}>{item.countryName}</option>
-                                )
-                            }
-                        </select>
-                    </div>
+                    <Input
+                        label="Holiday"
+                        type="number"
+                        value={formData.holidayAllowance}
+                        onChange={handleForm}
+                        name="holidayAllowance"
+                        required={true}
+                    />
+                    
                     <div>
                         {
                             extraFieldData?.status && (

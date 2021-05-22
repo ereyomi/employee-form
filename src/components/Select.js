@@ -1,9 +1,11 @@
 import React from 'react'
-const Select = ({value, onChange, options, label}) => {
+
+
+const Select = ({value, onChange, options, label, name, required=false}) => {
     return (
         <div>
-            <label htmlFor="country">{ label }</label>
-            <select onChange={onChange} value={value}>
+            <label htmlFor={name}>{ label }</label>
+            <select onChange={onChange} value={value} name={ name } id={ name } required={ required }>
                 <option
                     key="default-marital-status"
                     value=""
