@@ -4,12 +4,12 @@ import ExtraFields from './ExtraFields';
 import {getExtraFormAccessByCountries} from './../utils/helpers'
 
 const formDataStructure = {
-    countryOfWork: '',
+    countryOfWork: 'ES',
     firstName: '',
     lastName: '',
     dateOfBirth: '',
     holidayAllowance: 0,
-    maritalStatus: '',
+    maritalStatus: 'M',
     numberOfChildren: 0,
     socialInsuranceNumber: 0,
     workingHours: 0,
@@ -108,7 +108,7 @@ const FormPage = () => {
                     />
                     <div className="custom-app-form">
                         <label htmlFor="country">Select Country</label>
-                        <select value={formData.country} onChange={handleOnChangeCountrySeletion} name="country">
+                        <select value={formData.countryOfWork} onChange={handleOnChangeCountrySeletion} name="countryOfWork">
                          
                             {
                                 countriesData && countriesData.length > 0 && countriesData.map(
@@ -120,7 +120,7 @@ const FormPage = () => {
                     <div>
                         {
                             extraFieldData?.status && (
-                                <ExtraFields {...extraFieldData}/>
+                                <ExtraFields {...extraFieldData} onChange={handleForm} value={formData}/>
                             )
                         }
                         

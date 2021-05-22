@@ -1,5 +1,5 @@
 import React from 'react'
-import MaritalStatusSelection from './MaritalStatusSelection'
+import Select from './Select'
 import Input from './Input'
 
 
@@ -13,10 +13,12 @@ const ExtraFields = ( {formAccess, value, onChange} ) => {
                     extralFields && extralFields.map( (field) => (
                         field.type === 'select'
                             ?
-                            ( <MaritalStatusSelection {...field}/> ) :
+                            ( <Select {...field} key={field.name} onChange={onChange} value={ value[field.name] }/> ) :
                             <Input
                                 key={field.name}
                                 {...field}
+                                onChange={onChange}
+                                value={value[field.name]}
                             />
                     )    
                   )  
