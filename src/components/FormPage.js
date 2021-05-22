@@ -113,6 +113,7 @@ const FormPage = () => {
                         onChange={handleForm}
                         name="holidayAllowance"
                         required={true}
+                        {...extraFieldData?.formAccess?.rules?.holidayAllowance}
                     />
                     
                     <div>
