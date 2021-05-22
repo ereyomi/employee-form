@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import Input from './Input';
 import ExtraFields from './ExtraFields';
+import {getExtraFormAccessByCountries} from './../utils/helpers'
 
 const formDataStructure = {
     countryOfWork: '',
@@ -43,9 +44,12 @@ const FormPage = () => {
       });
   }
   useEffect(()=>{
-    getData()
+      getData()
+      console.log( getExtraFormAccessByCountries( 'ES' ) )
+      setExtraFieldData(getExtraFormAccessByCountries( 'ES' ))
   }, [] )
     const [ formData, setFormData ] = useState( formDataStructure )
+    const [extraFieldData, setExtraFieldData ] = useState( null )
     const handleForm = ( event ) => {
         event.preventDefault()
         const {name, value} = event.target
@@ -57,6 +61,13 @@ const FormPage = () => {
     const handleSubmit = ( event ) => {
         event.preventDefault()
         console.log(formData)
+    }
+    const handleOnChangeCountrySeletion = (event) => {
+        event.preventDefault()
+        const {name, value} = event.target
+        const getExtraFieldData = getExtraFormAccessByCountries(value)
+        console.log( name, value, getExtraFieldData )
+        setExtraFieldData(getExtraFieldData)
     }
     return (
         <div className="sdsdsds">
@@ -97,7 +108,7 @@ const FormPage = () => {
                     />
                     <div className="custom-app-form">
                         <label htmlFor="country">Select Country</label>
-                        <select value={formData.country} onChange={handleForm} name="country">
+                        <select value={formData.country} onChange={handleOnChangeCountrySeletion} name="country">
                          
                             {
                                 countriesData && countriesData.length > 0 && countriesData.map(
@@ -107,7 +118,12 @@ const FormPage = () => {
                         </select>
                     </div>
                     <div>
-                        <ExtraFields />
+                        {
+                            extraFieldData?.status && (
+                                <ExtraFields {...extraFieldData}/>
+                            )
+                        }
+                        
                     </div>
                     <div className="formControl">
                         <button type="submit">Submit</button>

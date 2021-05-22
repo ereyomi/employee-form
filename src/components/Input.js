@@ -8,7 +8,8 @@ const Input = (
         onChange,
         required = false,
         disabled = false,
-        label = ''
+        label = '',
+        ...others
     }
 ) => {
     
@@ -27,7 +28,8 @@ const Input = (
                 name={ name }
                 id={ name }
                 required={ required }
-                disabled={ disabled }
+                disabled={disabled}
+                {...others}
             />
         </div>
     )

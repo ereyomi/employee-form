@@ -1,6 +1,5 @@
 import React from 'react'
-import {maritalStatus} from './../utils/helpers'
-const MaritalStatusSelection = ({value, onChange}) => {
+const MaritalStatusSelection = ({value, onChange, options}) => {
     return (
         <div>
             <label htmlFor="country">Select Country</label>
@@ -12,7 +11,7 @@ const MaritalStatusSelection = ({value, onChange}) => {
                     Select Marital Status
                 </option>
                 {
-                    maritalStatus.map(
+                    options.map(
                         ( d ) =>
                             <option key={d.value}>{ d.label }</option>
                     )
