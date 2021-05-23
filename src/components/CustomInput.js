@@ -21,7 +21,7 @@ const CustomInput = (
             </label>
             <input
                 type={ type }
-                {...register(name, { ...rules })}
+                {...register(name, rules)}
             />
             <p>{error && "required"}</p>
         </div>

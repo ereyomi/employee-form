@@ -1,25 +1,12 @@
 import React, {useState, useEffect} from 'react';
-import ExtraFields from './ExtraFields';
-import {getExtraFormAccessByCountries, formFields} from './../utils/helpers'
+import {getExtraFormAccessByCountries, getField, updateFieldAccess} from './../utils/helpers'
 import {useForm} from "react-hook-form";
 import CustomInput from './CustomInput';
 import CustomSelect from './CustomSelect'
-const formDataStructure = {
-    countryOfWork: '',
-    firstName: '',
-    lastName: '',
-    dateOfBirth: '',
-    holidayAllowance: 0,
-    maritalStatus: '',
-    numberOfChildren: 0,
-    socialInsuranceNumber: 0,
-    workingHours: 0,
-    country: '',
-
-}
 
 const FormPage = () => {
-  const [countriesData,setCountriesData]=useState([]);
+    const [ countriesData, setCountriesData ] = useState( [] );
+    const [formFields, setFormFields] = useState( [] );
   const getData = () => {
     fetch('countries-key-value.json'
     ,{
@@ -46,35 +33,20 @@ const FormPage = () => {
   }
   useEffect(()=>{
       getData()
+      setFormFields( getField() )
   }, [] )
     // react form handlew
     const { register, formState: { errors }, handleSubmit } = useForm();
-    // for from data
-    const [ formData, setFormData ] = useState( formDataStructure )
-    // For Extrafields
-    const [ extraFieldData, setExtraFieldData ] = useState( null )
-    // handle form data
-    /* const handleForm = ( event ) => {
-        event.preventDefault()
-        const {name, value} = event.target
-        setFormData( (prevData) => ({
-            ...prevData,
-            [name]: value 
-        }))
-    } */
-    /* const handleSubmit = ( event ) => {
-        event.preventDefault()
-        console.log(formData)
-    } */
     const handleOnSubmit = data => {
         console.log(data)
     }
     const handleOnChangeCountrySeletion = (event) => {
         event.preventDefault()
         const {name, value} = event.target
+        if(name !== 'countryOfWork') return
         const getExtraFieldData = getExtraFormAccessByCountries(value)
         console.log( name, value, getExtraFieldData )
-        setExtraFieldData(getExtraFieldData)
+        setFormFields(updateFieldAccess(value))
     }
     return (
         <div className="sdsdsds">
@@ -93,7 +65,7 @@ const FormPage = () => {
                                             rules={formField.rules}
                                             error={errors[ formField.field.name ]}
                                             // this can be improved on
-                                            options={formField.field.name === 'countryOfWork' ? countriesData : ''}
+                                            options={formField.field.name === 'countryOfWork' ? countriesData : formField.field.options}
                                             key={formField.field.name}
                                             onChange={handleOnChangeCountrySeletion}
                                         /> 
@@ -114,9 +86,9 @@ const FormPage = () => {
                     </div>
                     <div>
                         {
-                            extraFieldData?.status && (
-                                <ExtraFields {...extraFieldData} value={formData} register={register} errors={ errors }/>
-                            )
+                           /*  extraFieldData?.status && (
+                                <ExtraFields {...extraFieldData} register={register} errors={ errors }/>
+                            ) */
                         }  
                     </div>
                     <div className="formControl">

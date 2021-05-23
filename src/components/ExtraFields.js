@@ -2,7 +2,7 @@ import React from 'react'
 import CustomInput from './CustomInput'
 import CustomSelect from './CustomSelect'
 
-const ExtraFields = ( {formAccess, value, onChange, register, errors} ) => {
+const ExtraFields = ( {formAccess, register, errors} ) => {
     const {extralFields} = formAccess
     return (
         <div>

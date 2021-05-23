@@ -13,11 +13,11 @@ const CustomSelect = (
     }
 ) => {
     return (
-        <div>
+        <div key={name}>
             <label htmlFor={name}>{ label }</label>
-            <select  {...register(name, { ...rules })} {...others}>
+            <select  {...register(name, rules)} {...others}>
                 <option
-                    key="default-marital-status"
+                    key={`default-status-${name}`}
                     value=""
                 >
                    {label}
