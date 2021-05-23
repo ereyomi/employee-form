@@ -8,7 +8,63 @@ export const maritalStatus = [
         value: 'F'
     }
 ]
-
+export const formFields = [
+    {
+        field: {
+            type: 'select',
+            label: 'Country of work',
+            name: 'countryOfWork'
+        },
+        rules: {
+            required: true
+        }
+        
+    },
+    {
+        field: {
+            type: 'text',
+            label: 'First Name',
+            name: 'firstName'
+        },
+        rules: {
+            required: true
+        }
+        
+    },
+    {
+        field: {
+            type: 'text',
+            label: 'Last Name',
+            name: 'lastName'
+        },
+        rules: {
+            required: true
+        }
+    },
+    {
+        field: {
+            type: 'date',
+            label: 'Date of Birth',
+            name: 'dateOfBirth'
+        },
+        rules: {
+            required: true
+        }
+    },
+    {
+        field: {
+            type: 'number',
+            label: 'Holiday Allowance',
+            name: 'holidayAllowance'
+        },
+        rules: {
+            required: true
+        }
+    },
+];
+export const getFormField = () => {
+    return formFields;
+}
 const formExtraFieldsByCountries = {
     // for (ES) spanin
     ES: {
@@ -64,7 +120,7 @@ const formExtraFieldsByCountries = {
     },
 };
 
-export const getExtraFormAccessByCountries = ( key ) => {
+export const getExtraFormAccessByCountries = key => {
     const formAccess = formExtraFieldsByCountries[ key ]
     return {
         status: formAccess ? true : false,

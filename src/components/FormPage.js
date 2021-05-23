@@ -2,8 +2,10 @@ import React, {useState, useEffect} from 'react';
 import Input from './Input';
 import Select from './Select';
 import ExtraFields from './ExtraFields';
-import {getExtraFormAccessByCountries} from './../utils/helpers'
-
+import {getExtraFormAccessByCountries, formFields} from './../utils/helpers'
+import {useForm} from "react-hook-form";
+import CustomInput from './CustomInput';
+import CustomSelect from './CustomSelect'
 const formDataStructure = {
     countryOfWork: '',
     firstName: '',
@@ -47,19 +49,27 @@ const FormPage = () => {
   useEffect(()=>{
       getData()
   }, [] )
+    // react form handlew
+    const { register, formState: { errors }, handleSubmit } = useForm();
+    // for from data
     const [ formData, setFormData ] = useState( formDataStructure )
-    const [extraFieldData, setExtraFieldData ] = useState( null )
-    const handleForm = ( event ) => {
+    // For Extrafields
+    const [ extraFieldData, setExtraFieldData ] = useState( null )
+    // handle form data
+    /* const handleForm = ( event ) => {
         event.preventDefault()
         const {name, value} = event.target
         setFormData( (prevData) => ({
             ...prevData,
             [name]: value 
         }))
-    }
-    const handleSubmit = ( event ) => {
+    } */
+    /* const handleSubmit = ( event ) => {
         event.preventDefault()
         console.log(formData)
+    } */
+    const handleOnSubmit = data => {
+        console.log(data)
     }
     const handleOnChangeCountrySeletion = (event) => {
         event.preventDefault()
@@ -72,57 +82,43 @@ const FormPage = () => {
         <div className="sdsdsds">
             <h1>Employee Form Page</h1>
             <div>
-                <form onSubmit={handleSubmit}>
-                    <div className="custom-app-form">
-                        <Select
-                            value={formData.countryOfWork}
-                            onChange={handleOnChangeCountrySeletion}
-                            name="countryOfWork"
-                            options={countriesData}
-                            label="Select country of work"
-                        />
+                <form onSubmit={handleSubmit( handleOnSubmit )}>
+                    <div>
+                        {
+                            formFields.map( formField => (
+                                formField.field.type === 'select' ?
+                                    (
+                                        <CustomSelect
+                                            label={formField.field.label}
+                                            name={formField.field.name}
+                                            register={register}
+                                            rules={formField.rules}
+                                            error={errors[ formField.field.name ]}
+                                            // this can be improved on
+                                            options={formField.field.name === 'countryOfWork' ? countriesData : ''}
+                                            key={formField.field.name}
+                                        /> 
+                                    ) : (
+                                        <CustomInput
+                                            label={formField.field.label}
+                                            type={formField.field.type}
+                                            name={formField.field.name}
+                                            register={register}
+                                            rules={formField.rules}
+                                            error={errors[ formField.field.name ]}
+                                            key={formField.field.name}
+                                        />   
+                                    )
+                                
+                            ))
+                        }
                     </div>
-                    <Input
-                        label="First Name"
-                        type="text"
-                        value={formData.firstName}
-                        onChange={handleForm}
-                        name="firstName"
-                        required={true}
-                    />
-                    <Input
-                        type="text"
-                        value={formData.lastName}
-                        onChange={handleForm}
-                        name="lastName"
-                        label="Last Name"
-                        required={true}
-                    />
-                    <Input
-                        label="Date Of Birth"
-                        type="date"
-                        value={formData.dateOfBirth}
-                        onChange={handleForm}
-                        name="dateOfBirth"
-                        required={true}
-                    />
-                    <Input
-                        label="Holiday"
-                        type="number"
-                        value={formData.holidayAllowance}
-                        onChange={handleForm}
-                        name="holidayAllowance"
-                        required={true}
-                        {...extraFieldData?.formAccess?.rules?.holidayAllowance}
-                    />
-                    
                     <div>
                         {
                             extraFieldData?.status && (
-                                <ExtraFields {...extraFieldData} onChange={handleForm} value={formData}/>
+                                <ExtraFields {...extraFieldData} value={formData}/>
                             )
-                        }
-                        
+                        }  
                     </div>
                     <div className="formControl">
                         <button type="submit">Submit</button>
