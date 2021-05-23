@@ -85,11 +85,6 @@ const FormPage = () => {
                         }
                     </div>
                     <div>
-                        {
-                           /*  extraFieldData?.status && (
-                                <ExtraFields {...extraFieldData} register={register} errors={ errors }/>
-                            ) */
-                        }  
                     </div>
                     <div className="formControl">
                         <button type="submit">Submit</button>
