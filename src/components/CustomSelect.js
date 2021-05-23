@@ -8,13 +8,14 @@ const CustomSelect = (
         register,
         rules,
         error,
-        options
+        options,
+        ...others
     }
 ) => {
     return (
         <div>
             <label htmlFor={name}>{ label }</label>
-            <select  {...register(name, { ...rules })}>
+            <select  {...register(name, { ...rules })} {...others}>
                 <option
                     key="default-marital-status"
                     value=""

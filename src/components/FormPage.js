@@ -1,6 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import Input from './Input';
-import Select from './Select';
 import ExtraFields from './ExtraFields';
 import {getExtraFormAccessByCountries, formFields} from './../utils/helpers'
 import {useForm} from "react-hook-form";
@@ -88,15 +86,16 @@ const FormPage = () => {
                             formFields.map( formField => (
                                 formField.field.type === 'select' ?
                                     (
+
                                         <CustomSelect
-                                            label={formField.field.label}
-                                            name={formField.field.name}
+                                            {...formField.field}
                                             register={register}
                                             rules={formField.rules}
                                             error={errors[ formField.field.name ]}
                                             // this can be improved on
                                             options={formField.field.name === 'countryOfWork' ? countriesData : ''}
                                             key={formField.field.name}
+                                            onChange={handleOnChangeCountrySeletion}
                                         /> 
                                     ) : (
                                         <CustomInput
@@ -116,7 +115,7 @@ const FormPage = () => {
                     <div>
                         {
                             extraFieldData?.status && (
-                                <ExtraFields {...extraFieldData} value={formData}/>
+                                <ExtraFields {...extraFieldData} value={formData} register={register} errors={ errors }/>
                             )
                         }  
                     </div>

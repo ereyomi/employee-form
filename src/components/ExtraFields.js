@@ -1,24 +1,29 @@
 import React from 'react'
-import Select from './Select'
-import Input from './Input'
+import CustomInput from './CustomInput'
+import CustomSelect from './CustomSelect'
 
-
-const ExtraFields = ( {formAccess, value, onChange} ) => {
+const ExtraFields = ( {formAccess, value, onChange, register, errors} ) => {
     const {extralFields} = formAccess
     return (
         <div>
-            
             <div>
                 {
                     extralFields && extralFields.map( (field) => (
                         field.type === 'select'
                             ?
-                            ( <Select {...field} key={field.name} onChange={onChange} value={ value[field.name] }/> ) :
-                            <Input
+                            (
+                                <CustomSelect
+                                    {...field}
+                                    register={register}
+                                    error={errors[ field.name ]}
+                                    key={field.name}
+                                /> 
+                             ) :
+                            <CustomInput
                                 key={field.name}
                                 {...field}
-                                onChange={onChange}
-                                value={value[field.name]}
+                                register={register}
+                                error={errors[ field.name ]}
                             />
                     )    
                   )  
