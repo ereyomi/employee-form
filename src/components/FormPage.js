@@ -5,21 +5,26 @@ import CustomInput from './CustomInput';
 import CustomSelect from './CustomSelect'
 
 const FormPage = () => {
+  // react form handle state
+  const { register, formState: { errors }, handleSubmit } = useForm();
+  // set country data state
     const [ countriesData, setCountriesData ] = useState( [] );
+    // formField state
     const [formFields, setFormFields] = useState( [] );
-  const getData = () => {
+
+  useEffect(()=>{
     fetch('countries-key-value.json'
-    ,{
-      headers : { 
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-       }
-    }
+      ,{
+        headers : {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+         }
+      }
     )
       .then((response) => {
         return response.json();
       })
-        .then( ( myJson ) => {
+      .then( ( myJson ) => {
             const mapCountryData = Object.keys(myJson).map(
                 key => {
                     return {
@@ -28,15 +33,15 @@ const FormPage = () => {
                     }
               }
             )
+        // set countries data
         setCountriesData(mapCountryData)
-      });
-  }
-  useEffect(()=>{
-      getData()
-      setFormFields( getField() )
+      })
+      .catch(err => console.log(err))
+      .finally(
+        ()=> setFormFields( getField() )
+      );
+
   }, [] )
-    // react form handlew
-    const { register, formState: { errors }, handleSubmit } = useForm();
     const handleOnSubmit = data => {
         console.log(data)
     }
@@ -68,7 +73,7 @@ const FormPage = () => {
                                             options={formField.field.name === 'countryOfWork' ? countriesData : formField.field.options}
                                             key={formField.field.name}
                                             onChange={handleOnChangeCountrySeletion}
-                                        /> 
+                                        />
                                     ) : (
                                         <CustomInput
                                             label={formField.field.label}
@@ -78,9 +83,9 @@ const FormPage = () => {
                                             rules={formField.rules}
                                             error={errors[ formField.field.name ]}
                                             key={formField.field.name}
-                                        />   
+                                        />
                                     )
-                                
+
                             ))
                         }
                     </div>
