@@ -10,10 +10,10 @@ const CustomInput = (
         error
     }
 ) => {
-    
+
     return (
         <div
-            className="custom-app-form"
+            className="my-form-group"
             key={name}
         >
             <label htmlFor={name}>
@@ -23,7 +23,7 @@ const CustomInput = (
                 type={ type }
                 {...register(name, rules)}
             />
-            <p>{error && "required"}</p>
+            <p className="error">{error && "required"}</p>
         </div>
     )
 }

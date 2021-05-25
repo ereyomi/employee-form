@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import {getExtraFormAccessByCountries, getField, updateFieldAccess} from './../utils/helpers'
 import {useForm} from "react-hook-form";
-import CustomInput from './CustomInput';
-import CustomSelect from './CustomSelect'
+import CustomInput from './../components/CustomInput';
+import CustomSelect from './../components/CustomSelect'
 
 const FormPage = () => {
   // react form handle state
@@ -54,10 +54,10 @@ const FormPage = () => {
         setFormFields(updateFieldAccess(value))
     }
     return (
-        <div className="sdsdsds">
+        <div className="formPage">
             <h1>Employee Form Page</h1>
             <div>
-                <form onSubmit={handleSubmit( handleOnSubmit )}>
+                <form onSubmit={handleSubmit( handleOnSubmit )} className="myForm">
                     <div>
                         {
                             formFields.map( formField => (
@@ -89,9 +89,7 @@ const FormPage = () => {
                             ))
                         }
                     </div>
-                    <div>
-                    </div>
-                    <div className="formControl">
+                    <div className="my-form-group">
                         <button type="submit">Submit</button>
                     </div>
                 </form>

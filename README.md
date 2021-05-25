@@ -3,7 +3,7 @@
 Clone project
 
 ```bash
-    > git clone https://github.com/ereyomi/employee-form.git
+git clone https://github.com/ereyomi/employee-form.git
 ```
 
 ## Available Scripts

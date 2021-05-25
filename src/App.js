@@ -1,6 +1,5 @@
-/* import logo from './logo.svg';
-import './App.css'; */
-import FormPage from './components/FormPage';
+import './App.css';
+import FormPage from './container/FormPage';
 function App() {
   return (
     <div className="App">

@@ -13,7 +13,7 @@ const CustomSelect = (
     }
 ) => {
     return (
-        <div key={name}>
+        <div key={name} className="my-form-group">
             <label htmlFor={name}>{ label }</label>
             <select  {...register(name, rules)} {...others}>
                 <option
@@ -29,7 +29,7 @@ const CustomSelect = (
                     )
                 }
             </select>
-            <p>{error && "required"}</p>
+            <p className="error">{error && "required"}</p>
         </div>
     )
 }

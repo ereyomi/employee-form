@@ -1,38 +1,105 @@
+
 .App {
-  text-align: center;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background: rgb(78,7,92);
+    background: linear-gradient(90deg, rgba(78,7,92,1) 0%, rgba(96,12,112,1) 100%);
+}
+.formPage {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 20px;
+    background: rgb(78,7,92);
+    background: linear-gradient(90deg, rgba(78,7,92,1) 0%, rgba(96,12,112,1) 100%);
+    overflow-y: auto;
+}
+.formPage > h1 {
+    color: white;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.myform {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 20px;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.my-form-group {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 100%;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+    margin: 15px;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.my-form-group label {
+  color: #fff;
+  font-size: 1rem;
+  margin-bottom: 5px;
 }
-
-.App-link {
-  color: #61dafb;
+.my-form-group select,
+.my-form-group input {
+    color: white;
+    background: none;
+    border: none;
+    outline: none;
+    padding: 10px;
+    border: 1px solid #fff;
+    border-radius: 5px;
 }
+.my-form-group select option{
+  color: black;
+}
+.my-form-group input,
+.my-form-group input::placeholder {
+     color: #fff;
+}
+.my-form-group input::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+}
+.my-form-group .error {
+  color: #fff;
+  font-size: 0.6rem;
+  margin: 0;
+}
+.my-form-group button {
+    width: 100%;
+    padding: 12px 15px;
+    border-radius: 5px;
+    border: none;
+    font-size: 1rem;
+    background: rgb(255,0,0);
+    background: linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(255,154,0,1) 100%);
+    color: white;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: border-radius 0.8s ease-in-out;
+    outline: none;
+}
+.my-form-group button:hover {
+     border-radius: 10px;
+}
+@media screen and (min-width: 600px) {
+    .myform {
+        width: 60vw;
+        padding-top: 50px;
+    }
+}
+@media screen and (min-width: 800px) {
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+    .myform {
+        width: 40vw;
+        padding-top: 50px;
+    }
 }
