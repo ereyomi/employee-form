@@ -13,6 +13,7 @@ const FormPage = () => {
     const [formFields, setFormFields] = useState( [] );
 
   useEffect(()=>{
+    console.log(updateFieldAccess('ES'))
     fetch('countries-key-value.json'
       ,{
         headers : {

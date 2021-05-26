@@ -1,4 +1,5 @@
 import React from 'react';
+import {getError} from './../utils/helpers'
 
 const CustomInput = (
     {
@@ -10,7 +11,6 @@ const CustomInput = (
         error
     }
 ) => {
-
     return (
         <div
             className="my-form-group"
@@ -23,7 +23,7 @@ const CustomInput = (
                 type={ type }
                 {...register(name, rules)}
             />
-            <p className="error">{error && "required"}</p>
+            <p className="error">{error && getError(error)}</p>
         </div>
     )
 }

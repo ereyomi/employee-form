@@ -18,7 +18,7 @@ export const formFields = {
         rules: {
             required: true
         }
-        
+
     },
     firstName: {
         field: {
@@ -29,7 +29,7 @@ export const formFields = {
         rules: {
             required: true
         }
-        
+
     },
     lastName: {
         field: {
@@ -137,9 +137,9 @@ const formExtraField = {
         },
         extralRules: {
             holidayAllowance: {
-                max: 30
+                max: 40
             }
-        } 
+        }
     },
 };
 export const getField = (fField = formFields) => {
@@ -175,14 +175,14 @@ const setExtralRulesIfExist = ( data ) => {
 }
 export const updateFieldAccess = key => {
     const formAccessData = formExtraField[ key ]
-    // setExtralRulesIfExist(formAccessData)
-    // return formAccessData ? getField(setExtralRulesIfExist(formAccessData)) : getField()
-    if ( formAccessData?.extralRules ) {
+    console.log('dsdsd',formAccessData)
+    if ( formAccessData.hasOwnProperty( 'extralRules' ) && formAccessData.hasOwnProperty( 'extralFields' ) ) {
+        console.log('here', setExtralRulesIfExist( formAccessData ))
         return [
             ...getField( setExtralRulesIfExist( formAccessData ) ),
             ...getField(formAccessData.extralFields)
         ]
-    } else if(formAccessData?.extralFields && !formAccessData?.extralRules ) {
+    } else if(!formAccessData.hasOwnProperty('extralRules') && formAccessData.hasOwnProperty('extralFields') ) {
         return [
             ...getField(),
             ...getField(formAccessData.extralFields)
@@ -190,5 +190,23 @@ export const updateFieldAccess = key => {
     } else {
         return getField()
     }
-    
+
+}
+export const getError = (error) => {
+  switch (error.type) {
+    case 'required':
+        return 'required'
+      // eslint-disable-next-line no-unreachable
+      break;
+      case 'min':
+          return 'unexpected min. Min 30 allowed.'
+        // eslint-disable-next-line no-unreachable
+        break;
+        case 'max':
+            return 'unexpected max. Max 40 allowed.'
+          // eslint-disable-next-line no-unreachable
+          break;
+    default:
+      return 'required'
+  }
 }
